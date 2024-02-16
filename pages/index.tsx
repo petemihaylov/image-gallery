@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import Bridge from "../components/Icons/Bridge";
-import Logo from "../components/Icons/Logo";
 import Modal from "../components/Modal";
 import cloudinary from "../utils/cloudinary";
 import getBase64ImageUrl from "../utils/generateBlurPlaceholder";
@@ -33,7 +32,7 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         <title>Art House Gardenia | 2024</title>
         <meta
           property="og:image"
-          content="https://nextjsconf-pics.vercel.app/og-image.png"
+          content="https://petemihaylov.com/og-image.png"
         />
         <meta
           name="twitter:image"
@@ -62,16 +61,18 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
               Art house gardenia Photos
             </h1>
             <p className="max-w-[40ch] text-sm text-white/75 sm:max-w-[32ch]">
-              Join us in exploring new art forms and ideas. Stay connected and be at the forefront of creativity.
+              Join us in exploring new art forms and ideas. Stay connected and
+              be at the forefront of creativity.
             </p>
-            
+
+            <FeaturesList />
             <a
               className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-              href=""
+              href="https://www.facebook.com/GardeniaCampArtHouse"
               target="_blank"
               rel="noreferrer"
             >
-              Subscribe
+              Contact us
             </a>
           </div>
           {images.map(({ id, public_id, format, blurDataUrl }) => (
@@ -145,3 +146,47 @@ export async function getStaticProps() {
     },
   };
 }
+
+import React from 'react'
+
+const FeaturesList = () => {
+  const features = [
+    '2 bedrooms',
+    '2x double beds (160x200)',
+    'Air-conditioning',
+    'Kitchen',
+    'Coffee-maker',
+    'Fridge with a freezer',
+    'Additional amenities',
+    'Veranda with furniture and shed 30 sq.m.',
+  ]
+  return (
+    <div>
+      {features.map((feature, index) => (
+        <div key={index} className="flex items-center">
+          <div className="flex-shrink-0">
+            <svg
+              className="h-6 w-6 text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0  0  24  24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12  6v6m0  0v6m0-6h6m-6  0H6"
+              />
+            </svg>
+          </div>
+          <div className="ms-4 min-w-0 flex-2">
+            <p className="text-white-900 text-sm font-medium">{feature}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
