@@ -50,7 +50,7 @@ export default function SharedModal({
   return (
     <MotionConfig
       transition={{
-        x: { type: "spring", stiffness: 300, damping: 30 },
+        x: { type: 'spring', stiffness: 300, damping: 30 },
         opacity: { duration: 0.2 },
       }}
     >
@@ -74,7 +74,7 @@ export default function SharedModal({
                 <Image
                   src={`https://res.cloudinary.com/${
                     process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-                  }/image/upload/c_scale,${navigation ? "w_1280" : "w_1920"}/${
+                  }/image/upload/c_scale,${navigation ? 'w_1280' : 'w_1920'}/${
                     currentImage.public_id
                   }.${currentImage.format}`}
                   width={navigation ? 1280 : 1920}
@@ -98,7 +98,7 @@ export default function SharedModal({
                   {index > 0 && (
                     <button
                       className="absolute left-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
-                      style={{ transform: "translate3d(0, 0, 0)" }}
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                       onClick={() => changePhotoId(index - 1)}
                     >
                       <ChevronLeftIcon className="h-6 w-6" />
@@ -107,7 +107,7 @@ export default function SharedModal({
                   {index + 1 < images.length && (
                     <button
                       className="absolute right-3 top-[calc(50%-16px)] rounded-full bg-black/50 p-3 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white focus:outline-none"
-                      style={{ transform: "translate3d(0, 0, 0)" }}
+                      style={{ transform: 'translate3d(0, 0, 0)' }}
                       onClick={() => changePhotoId(index + 1)}
                     >
                       <ChevronRightIcon className="h-6 w-6" />
@@ -115,7 +115,7 @@ export default function SharedModal({
                   )}
                 </>
               )}
-              <div className="absolute top-0 right-0 flex items-center gap-2 p-3 text-white">
+              <div className="absolute right-0 top-0 flex items-center gap-2 p-3 text-white">
                 {navigation ? (
                   <a
                     href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${currentImage.public_id}.${currentImage.format}`}
@@ -128,7 +128,7 @@ export default function SharedModal({
                   </a>
                 ) : (
                   <a
-                    href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20pic%20from%20Next.js%20Conf!%0A%0Ahttps://nextjsconf-pics.vercel.app/p/${index}`}
+                    href={`https://twitter.com/intent/tweet?text=Check%20out%20this%20pic%20from%20Next.js%20Conf!%0A%0Ahttps://arthousegardenia.com/p/${index}`}
                     className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
                     target="_blank"
                     title="Open fullsize version"
@@ -141,7 +141,7 @@ export default function SharedModal({
                   onClick={() =>
                     downloadPhoto(
                       `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${currentImage.public_id}.${currentImage.format}`,
-                      `${index}.jpg`,
+                      `${index}.jpg`
                     )
                   }
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
@@ -150,7 +150,7 @@ export default function SharedModal({
                   <ArrowDownTrayIcon className="h-5 w-5" />
                 </button>
               </div>
-              <div className="absolute top-0 left-0 flex items-center gap-2 p-3 text-white">
+              <div className="absolute left-0 top-0 flex items-center gap-2 p-3 text-white">
                 <button
                   onClick={() => closeModal()}
                   className="rounded-full bg-black/50 p-2 text-white/75 backdrop-blur-lg transition hover:bg-black/75 hover:text-white"
@@ -169,29 +169,29 @@ export default function SharedModal({
             <div className="fixed inset-x-0 bottom-0 z-40 overflow-hidden bg-gradient-to-b from-black/0 to-black/60">
               <motion.div
                 initial={false}
-                className="mx-auto mt-6 mb-6 flex aspect-[3/2] h-14"
+                className="mx-auto mb-6 mt-6 flex aspect-[3/2] h-14"
               >
                 <AnimatePresence initial={false}>
                   {filteredImages.map(({ public_id, format, id }) => (
                     <motion.button
                       initial={{
-                        width: "0%",
+                        width: '0%',
                         x: `${Math.max((index - 1) * -100, 15 * -100)}%`,
                       }}
                       animate={{
                         scale: id === index ? 1.25 : 1,
-                        width: "100%",
+                        width: '100%',
                         x: `${Math.max(index * -100, 15 * -100)}%`,
                       }}
-                      exit={{ width: "0%" }}
+                      exit={{ width: '0%' }}
                       onClick={() => changePhotoId(id)}
                       key={id}
                       className={`${
                         id === index
-                          ? "z-20 rounded-md shadow shadow-black/50"
-                          : "z-10"
-                      } ${id === 0 ? "rounded-l-md" : ""} ${
-                        id === images.length - 1 ? "rounded-r-md" : ""
+                          ? 'z-20 rounded-md shadow shadow-black/50'
+                          : 'z-10'
+                      } ${id === 0 ? 'rounded-l-md' : ''} ${
+                        id === images.length - 1 ? 'rounded-r-md' : ''
                       } relative inline-block w-full shrink-0 transform-gpu overflow-hidden focus:outline-none`}
                     >
                       <Image
@@ -200,8 +200,8 @@ export default function SharedModal({
                         height={120}
                         className={`${
                           id === index
-                            ? "brightness-110 hover:brightness-110"
-                            : "brightness-50 contrast-125 hover:brightness-75"
+                            ? 'brightness-110 hover:brightness-110'
+                            : 'brightness-50 contrast-125 hover:brightness-75'
                         } h-full transform object-cover transition`}
                         src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_180/${public_id}.${format}`}
                       />
@@ -214,5 +214,5 @@ export default function SharedModal({
         </div>
       </div>
     </MotionConfig>
-  );
+  )
 }
