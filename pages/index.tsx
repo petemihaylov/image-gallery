@@ -158,7 +158,7 @@ const FeaturesList = () => {
     'Coffee-maker',
     'Fridge with a freezer',
     'Additional amenities',
-    'Veranda with furniture and shed 30 sq.m.',
+    'Veranda with furniture',
   ]
   return (
     <div>
