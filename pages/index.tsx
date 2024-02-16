@@ -12,19 +12,19 @@ import type { ImageProps } from "../utils/types";
 import { useLastViewedPhoto } from "../utils/useLastViewedPhoto";
 
 const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
-  const router = useRouter();
-  const { photoId } = router.query;
-  const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto();
+  const router = useRouter()
+  const { photoId } = router.query
+  const [lastViewedPhoto, setLastViewedPhoto] = useLastViewedPhoto()
 
-  const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null);
+  const lastViewedPhotoRef = useRef<HTMLAnchorElement>(null)
 
   useEffect(() => {
     // This effect keeps track of the last viewed photo in the modal to keep the index page in sync when the user navigates back
     if (lastViewedPhoto && !photoId) {
-      lastViewedPhotoRef.current.scrollIntoView({ block: "center" });
-      setLastViewedPhoto(null);
+      lastViewedPhotoRef.current.scrollIntoView({ block: 'center' })
+      setLastViewedPhoto(null)
     }
-  }, [photoId, lastViewedPhoto, setLastViewedPhoto]);
+  }, [photoId, lastViewedPhoto, setLastViewedPhoto])
 
   return (
     <>
@@ -32,11 +32,11 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
         <title>Art House Gardenia | 2024</title>
         <meta
           property="og:image"
-          content="https://arthousegardenia.com/og-image.png"
+          content="https://res.cloudinary.com/arthousegardenia/image/upload/arthousegardenia/qji4shedypddsmynp1ew.png"
         />
         <meta
           name="twitter:image"
-          content="https://arthousegardenia.com/og-image.png"
+          content="https://res.cloudinary.com/arthousegardenia/image/upload/arthousegardenia/qji4shedypddsmynp1ew.png"
         />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
@@ -68,11 +68,11 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
             <FeaturesList />
             <a
               className="pointer z-10 mt-6 rounded-lg border border-white bg-white px-3 py-2 text-sm font-semibold text-black transition hover:bg-white/10 hover:text-white md:mt-4"
-              href="https://www.facebook.com/GardeniaCampArtHouse"
+              href="https://arthousegardenia-newsletter.beehiiv.com/subscribe"
               target="_blank"
               rel="noreferrer"
             >
-              Contact us
+              Subscribe
             </a>
           </div>
           {images.map(({ id, public_id, format, blurDataUrl }) => (
@@ -107,19 +107,19 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
       </footer>
     </>
   )
-};
+}
 
-export default Home;
+export default Home
 
 export async function getStaticProps() {
   const results = await cloudinary.v2.search
     .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-    .sort_by("public_id", "desc")
+    .sort_by('public_id', 'desc')
     .max_results(400)
-    .execute();
-  let reducedResults: ImageProps[] = [];
+    .execute()
+  let reducedResults: ImageProps[] = []
 
-  let i = 0;
+  let i = 0
   for (let result of results.resources) {
     reducedResults.push({
       id: i,
@@ -127,24 +127,24 @@ export async function getStaticProps() {
       width: result.width,
       public_id: result.public_id,
       format: result.format,
-    });
-    i++;
+    })
+    i++
   }
 
   const blurImagePromises = results.resources.map((image: ImageProps) => {
-    return getBase64ImageUrl(image);
-  });
-  const imagesWithBlurDataUrls = await Promise.all(blurImagePromises);
+    return getBase64ImageUrl(image)
+  })
+  const imagesWithBlurDataUrls = await Promise.all(blurImagePromises)
 
   for (let i = 0; i < reducedResults.length; i++) {
-    reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i];
+    reducedResults[i].blurDataUrl = imagesWithBlurDataUrls[i]
   }
 
   return {
     props: {
       images: reducedResults,
     },
-  };
+  }
 }
 
 import React from 'react'
@@ -158,7 +158,7 @@ const FeaturesList = () => {
     'Coffee-maker',
     'Fridge with a freezer',
     'Additional amenities',
-    'Veranda with furniture',
+    'Lovely veranda',
   ]
   return (
     <div>
@@ -181,7 +181,7 @@ const FeaturesList = () => {
               />
             </svg>
           </div>
-          <div className="ms-4 min-w-0 flex-2">
+          <div className="flex-2 ms-4 min-w-0">
             <p className="text-white-900 text-sm font-medium">{feature}</p>
           </div>
         </div>
